@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt">
+    <head>
+        <meta charset="UTF-8">
+        <title>Bootelo Ranker</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}"/>
+    </head>
+    <body>
+        <div id="pagina">
+            <div id="menu">
+                <h1>Welcome to Bootelo</h1>
+            </div>
+            <div id="leaderboard">
+                {% for team in leaderboard %}
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>{{ team.team }}</h3>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">Posição: {{ team.position }}</p>
+                            <p class="card-text">ELO: {{ team.grade }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </body>
+</html>

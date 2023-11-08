@@ -1,0 +1,6 @@
+{
+    "game_data_filename" : "campeonato-brasileiro-full.csv",
+    "starter_elo" : 600,
+    "beta" : 200,
+    "k_update" : 5
+}
