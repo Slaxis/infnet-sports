@@ -5,7 +5,7 @@ from datetime import datetime
 from pandas import read_csv
 
 from ..stadium import Stadium
-from ..teams.team import Team
+from ..teams.team import Team, TrueSkillTeam
 from ..teams.teams import Teams
 from .game import Game
 from .result import Result
@@ -13,8 +13,10 @@ from .score import Score
 
 
 class Games(dict[int, Game]):
-    def __init__(self, game_dataframe_path : str = None):
+    use_trueskill_teams : bool
+    def __init__(self, game_dataframe_path : str = None, use_trueskill_teams : bool = False):
         super().__init__() # SUGESTÃO DO COPILOT GHAGHAAHA BOA COPILOT
+        self.use_trueskill_teams = use_trueskill_teams
         if game_dataframe_path:
             self.load_games(game_dataframe_path) # SUGESTÃO DO COPILOT
 
@@ -31,8 +33,13 @@ class Games(dict[int, Game]):
             hour = datetime(year, month, day, day_hour, day_minutes)
             home_name = row["mandante"].lower()
             away_name = row["visitante"].lower()
-            home = Team(home_name)
-            away = Team(away_name)
+
+            if self.use_trueskill_teams:
+                home = TrueSkillTeam(home_name)
+                away = TrueSkillTeam(away_name)
+            else:
+                home = Team(home_name)
+                away = Team(away_name)
             
             if row["vencedor"].lower() == home_name:
                 winner = 1
@@ -71,3 +78,15 @@ class Games(dict[int, Game]):
             if self[game].hour <= day:
                 games_until[game] = self[game] # SUGESTÃO DO COPILOT
         return games_until
+    
+    def get_teams_from_year(self, year = 2022) -> Teams:
+        teams = Teams()
+        for game in self:
+            if self[game].hour.year == year:
+                home = self[game].home
+                away = self[game].away
+                if home not in teams:
+                    teams[home.name] = home
+                if away not in teams:
+                    teams[away.name] = away
+        return teams
