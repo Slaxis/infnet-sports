@@ -5,13 +5,20 @@ class Team(Common):
     position : int
     grade : float
 
-    def __init__(self, name : str):
+    def __init__(self, name : str, position : int = 0, grade : float = 0.0):
         super().__init__(name)
-        self.position = 0
-        self.grade = 0.0
+        self.position = position
+        self.grade = grade
 
     def __repr__(self):
         return f"{self.name}: {self.position}º @ {self.grade:.0f}"
+
+    @property
+    def to_dict(self):
+        return {
+            "name": self.name,
+            "grade": self.grade
+        }
 
 class TrueSkillTeam(Team):
     rating : Rating
@@ -39,3 +46,4 @@ class TrueSkillTeam(Team):
     @property
     def grade(self):
         return self.mu - 3*self.sigma
+    

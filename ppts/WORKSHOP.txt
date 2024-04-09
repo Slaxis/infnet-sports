@@ -1,0 +1,35 @@
+ESTRUTURA DA APRESENTAÇÃO
+
+BUSINESS UNDERSTANDING
+> Descrição da abordagem do ponto de vista de negócio:
+>> Para quem? Atleta, Técnico, Time, Torcedor, etc.
+>> Qual objetivo da análise / aplicação?
+
+> Referências Bibliográficas
+
+DATA UNDERSTANDING
+> Descrição da Base de Dados
+>> O que é uma linha? (Granularidade)
+>> Qual o total de linhas?
+>> Quais são as colunas e seus tipos?
+
+DATA PREPARATION
+> Análise Exploratória dos Dados
+>> Estatísticas Univariadas das colunas
+>> Estatísticas Multivariadas
+>> Transformações Numéricas
+
+MODELING
+> Modelo
+>> Qual Modelo?
+>> Parametrização / Hiperparametrização?
+>> Treinamento
+
+EVALUATION
+> Figura de Mérito
+> Generalização
+> Gráficos suporte
+> Análise dos resultados
+> Conclusão
+>> Alcançaram o Objetivo?
+>> Quais seriam os próximos passos?

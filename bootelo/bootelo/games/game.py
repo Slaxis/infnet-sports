@@ -25,4 +25,3 @@ class Game:
 
     def __repr__(self):
         return f"{self.arena}, {self.home} X {self.away}"
-

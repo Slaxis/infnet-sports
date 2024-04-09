@@ -41,9 +41,14 @@ class EloRanker(Ranker):
             new_home, new_away = self.update_grades(home, away, game.result) # SUGESTÃO DO COPILOT + AJUSTE
             self.teams[game.home.name] = new_home # SUGESTÃO DO COPILOT
             self.teams[game.away.name] = new_away # SUGESTÃO DO COPILOT
+            # update the teams on game object
+            game.home = Team(new_home.name, new_home.position, new_home.grade)
+            game.away = Team(new_away.name, new_away.position, new_away.grade)
+            self.games[game_id] = game
 
         # atualizar as posições de todos os times
         self.teams.update_positions()
+
         return self.teams.ranking
 
     # Pega os times e devolve o ELO atualizado

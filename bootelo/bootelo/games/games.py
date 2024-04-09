@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from datetime import datetime
 
-from pandas import read_csv
+from pandas import read_csv, DataFrame
 
 from ..stadium import Stadium
 from ..teams.team import Team, TrueSkillTeam
@@ -90,3 +90,21 @@ class Games(dict[int, Game]):
                 if away not in teams:
                     teams[away.name] = away
         return teams
+    
+    def to_df(self) -> DataFrame:
+        # CREATE A ROW PER TEAM ELO PER GAME
+        team_grades = []
+        for game in self:
+            game_id = self[game].id
+            game_hour = self[game].hour
+            home_dict = self[game].home.to_dict
+            home_dict["game_id"] = game_id
+            home_dict["hour"] = game_hour
+
+            away_dict = self[game].away.to_dict
+            away_dict["game_id"] = game_id
+            away_dict["hour"] = game_hour
+            team_grades.append(home_dict)
+            team_grades.append(away_dict)
+        
+        return DataFrame(team_grades)
